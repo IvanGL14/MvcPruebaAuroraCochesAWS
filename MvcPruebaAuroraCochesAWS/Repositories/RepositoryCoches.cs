@@ -1,4 +1,5 @@
-﻿using MvcPruebaAuroraCochesAWS.Data;
+﻿using Microsoft.Extensions.Configuration;
+using MvcPruebaAuroraCochesAWS.Data;
 using MvcPruebaAuroraCochesAWS.Models;
 using System;
 using System.Collections.Generic;
@@ -10,15 +11,27 @@ namespace MvcPruebaAuroraCochesAWS.Repositories
     public class RepositoryCoches
     {
         private ContextCoches context;
+        private string bucketName;
 
-        public RepositoryCoches(ContextCoches context)
+
+        public RepositoryCoches(ContextCoches context, IConfiguration configuration)
         {
             this.context = context;
+            this.bucketName = configuration.GetValue<string>("AWS:BucketName");
         }
 
         public List<Coche> GetCoches()
         {
-            return this.context.Coches.ToList();
+            List<Coche> coches = new List<Coche>();
+            var consulta = from datos in this.context.Coches
+                           select datos;
+            foreach(Coche coche in consulta)
+            {
+                string urlBucket = "https://bucket-prueba-aurora-coches.s3.amazonaws.com/";
+                coche.Imagen = urlBucket + coche.Imagen;
+                coches.Add(coche);
+            }
+            return coches;
         }
 
         public void InsertCoche(int idcoche, string marca, string modelo, string conductor, string imagen)

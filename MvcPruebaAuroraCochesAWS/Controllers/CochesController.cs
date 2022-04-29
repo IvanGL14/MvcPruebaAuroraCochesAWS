@@ -1,8 +1,11 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
 using MvcPruebaAuroraCochesAWS.Models;
 using MvcPruebaAuroraCochesAWS.Repositories;
+using MvcPruebaAuroraCochesAWS.Services;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -11,10 +14,12 @@ namespace MvcPruebaAuroraCochesAWS.Controllers
     public class CochesController : Controller
     {
         private RepositoryCoches repo;
+        private ServiceAWS service;
 
-        public CochesController(RepositoryCoches repo)
+        public CochesController(RepositoryCoches repo, ServiceAWS service)
         {
             this.repo = repo;
+            this.service = service;
         }
 
         public IActionResult Index()
@@ -28,9 +33,11 @@ namespace MvcPruebaAuroraCochesAWS.Controllers
         }
 
         [HttpPost]
-        public IActionResult Create(Coche coche)
+        public async Task<IActionResult> Create(int idcoche, string marca, string modelo, string conductor, IFormFile imagen)
         {
-            this.repo.InsertCoche(coche.IdCoche, coche.Marca, coche.Modelo, coche.Conductor, coche.Imagen);
+            Stream streamImagen = imagen.OpenReadStream();
+            await this.service.UploadFilesAsync(streamImagen, imagen.FileName);
+            this.repo.InsertCoche(idcoche, marca, modelo, conductor, imagen.FileName);
             return RedirectToAction("Index");
         }
     }

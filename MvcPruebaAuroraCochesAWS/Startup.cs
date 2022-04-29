@@ -1,3 +1,4 @@
+using Amazon.S3;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -7,6 +8,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using MvcPruebaAuroraCochesAWS.Data;
 using MvcPruebaAuroraCochesAWS.Repositories;
+using MvcPruebaAuroraCochesAWS.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -29,6 +31,8 @@ namespace MvcPruebaAuroraCochesAWS
             string cadena = this.Configuration.GetConnectionString("CadenaAurora");
             services.AddTransient<RepositoryCoches>();
             services.AddDbContext<ContextCoches>(options => options.UseMySql(cadena, ServerVersion.AutoDetect(cadena)));
+            services.AddAWSService<IAmazonS3>();
+            services.AddTransient<ServiceAWS>();
             services.AddControllersWithViews();
         }
 
