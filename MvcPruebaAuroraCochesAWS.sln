@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.31321.278
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MvcPruebaAuroraCochesAWS", "MvcPruebaAuroraCochesAWS\MvcPruebaAuroraCochesAWS.csproj", "{B1593F28-62F1-4BBC-8675-4F651F0F46B1}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{B1593F28-62F1-4BBC-8675-4F651F0F46B1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B1593F28-62F1-4BBC-8675-4F651F0F46B1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B1593F28-62F1-4BBC-8675-4F651F0F46B1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B1593F28-62F1-4BBC-8675-4F651F0F46B1}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {D08CF99F-FC8A-4878-AD92-4CD414F8EFAD}
+	EndGlobalSection
+EndGlobal
