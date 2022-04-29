@@ -38,6 +38,7 @@ namespace MvcPruebaAuroraCochesAWS.Controllers
             Stream streamImagen = imagen.OpenReadStream();
             await this.service.UploadFilesAsync(streamImagen, imagen.FileName);
             this.repo.InsertCoche(idcoche, marca, modelo, conductor, imagen.FileName);
+            string k = "hola";
             return RedirectToAction("Index");
         }
     }
